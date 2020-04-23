@@ -22,8 +22,20 @@ app.engine('hbs',engines.handlebars);
 app.set('views','./views');
 app.set('view engine','hbs');
 
-var indexController = require("./index.js");
 
-app.use('/', indexController);
+var indexController = require('./index.js');
+var sanPhamController = require('./sanPham.js');
+var employeeController = require('./NhanVien.js');
+var managerController = require('./homepage.js')
 
-var server = app.listen(3000, function() {});
+
+app.use(express.static('public'));
+
+app.use('/',indexController);
+app.use('/index',indexController);
+app.use('/sanpham',sanPhamController);
+app.use('/nhanvien',employeeController);
+app.use('/homepage',managerController);
+
+
+app.listen(process.env.PORT || 3000);
